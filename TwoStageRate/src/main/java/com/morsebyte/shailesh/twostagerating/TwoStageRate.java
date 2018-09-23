@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -28,8 +29,6 @@ public class TwoStageRate {
     private static final String INSTALL_DATE = "TWOSTAGEINSTALLDATE";
     private static final String EVENT_COUNT = "TWOSTAGEEVENTCOUNT";
     private static final String STOP_TRACK = "TWOSTAGESTOPTRACK";
-    private static TwoStageRate singleton;
-    public AppRateDataModel appRateData = new AppRateDataModel();
     public RatePromptDialog ratePromptDialog = new RatePromptDialog();
     public FeedbackDialog feedbackDialog = new FeedbackDialog();
     public ConfirmRateDialog confirmRateDialog = new ConfirmRateDialog();
@@ -52,7 +51,6 @@ public class TwoStageRate {
 
     //for callback
     private FeedbackReceivedListener feedbackReceivedListener;
-    private DialogDismissedListener dialogDismissedListener;
     private FeedbackWithRatingReceivedListener feedbackWithRatingReceivedListener;
     private ConfirmRateDialogListener confirmRateDialogListener;
 
@@ -94,7 +92,7 @@ public class TwoStageRate {
      */
     public void showIfMeetsConditions() {
 
-        if (!Utils.getBooleanSystemValue(STOP_TRACK, mContext)) {
+        if (!Utils.getBooleanSystemValue(STOP_TRACK, mContext) || isDebug) {
             if (checkIfMeetsCondition() || isDebug) {
                 showRatePromptDialog();
                 Utils.setBooleanSystemValue(STOP_TRACK, true, mContext);
@@ -259,7 +257,7 @@ public class TwoStageRate {
         return dialog;
     }
 
-    public Dialog getConfirmRateDialog(final Context context, final ConfirmRateDialog confirmRateDialog) {
+    private Dialog getConfirmRateDialog(final Context context, final ConfirmRateDialog confirmRateDialog) {
         // custom dialog
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -267,21 +265,17 @@ public class TwoStageRate {
         dialog.setCancelable(this.confirmRateDialog.isDismissible());
 
         // set the custom dialog components - text, image and button
-        TextView title = (TextView) dialog.findViewById(R.id.tvConfirmRateTitle);
+        TextView title = dialog.findViewById(R.id.tvConfirmRateTitle);
         title.setText(confirmRateDialog.getTitle());
-        TextView text = (TextView) dialog.findViewById(R.id.tvConfirmRateText);
+        TextView text = dialog.findViewById(R.id.tvConfirmRateText);
         text.setText(confirmRateDialog.getDescription());
-        TextView deny = (TextView) dialog.findViewById(R.id.tvConfirmDeny);
+        Button deny = dialog.findViewById(R.id.btnConfirmDeny);
         deny.setText(confirmRateDialog.getNegativeText());
-        TextView submit = (TextView) dialog.findViewById(R.id.tvConfirmSubmit);
+        Button submit = dialog.findViewById(R.id.btnConfirmSubmit);
         submit.setText(confirmRateDialog.getPositiveText());
         deny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (confirmRateDialogListener != null) {
-                    confirmRateDialogListener.onConfirmationAccepted();
-                }
-
                 //Reseting twostage if declined and setting is done so
                 if ((Utils.getBooleanSystemValue(SHARED_PREFERENCES_SHOULD_RESET_ON_RATING_DECLINED, mContext, false))) {
                     resetTwoStage();
@@ -293,6 +287,9 @@ public class TwoStageRate {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (confirmRateDialogListener != null) {
+                    confirmRateDialogListener.onConfirmationAccepted();
+                }
 
                 //// TODO: 2/8/16 : Write a callback
                 final Intent intentToAppstore = settings.getStoreType() == Settings.StoreType.GOOGLEPLAY ?
@@ -314,7 +311,7 @@ public class TwoStageRate {
         return dialog;
     }
 
-    public Dialog getFeedbackDialog(final Context context, final FeedbackDialog feedbackDialog, final FeedbackReceivedListener feedbackReceivedListener) {
+    private Dialog getFeedbackDialog(final Context context, final FeedbackDialog feedbackDialog, final FeedbackReceivedListener feedbackReceivedListener) {
         // custom dialog
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -322,24 +319,24 @@ public class TwoStageRate {
         dialog.setContentView(R.layout.dialog_feedback);
 
         // set the custom dialog components - text, image and button
-        TextView title = (TextView) dialog.findViewById(R.id.tvFeedbackTitle);
+        TextView title = dialog.findViewById(R.id.tvFeedbackTitle);
         title.setText(feedbackDialog.getTitle());
-        TextView text = (TextView) dialog.findViewById(R.id.tvFeedbackText);
+        TextView text = dialog.findViewById(R.id.tvFeedbackText);
         text.setText(feedbackDialog.getDescription());
-        TextView deny = (TextView) dialog.findViewById(R.id.tvFeedbackDeny);
+        Button deny = dialog.findViewById(R.id.btnFeedbackDeny);
         deny.setText(feedbackDialog.getNegativeText());
-        final EditText etFeedback = (EditText) dialog.findViewById(R.id.etFeedback);
-        TextView submit = (TextView) dialog.findViewById(R.id.tvFeedbackSubmit);
+        final EditText etFeedback = dialog.findViewById(R.id.etFeedback);
+        Button submit = dialog.findViewById(R.id.btnFeedbackSubmit);
         submit.setText(feedbackDialog.getPositiveText());
         deny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //ToDo : emit something here
-                //Reseting twostage if declined and setting is done so
+                //Resetting twostage if declined and setting is done so
                 if ((Utils.getBooleanSystemValue(SHARED_PREFERENCES_SHOULD_RESET_ON_FEEDBACK_DECLINED, mContext, false))) {
                     resetTwoStage();
                 }
-                    dialog.dismiss();
+                dialog.dismiss();
             }
 
         });
@@ -347,14 +344,11 @@ public class TwoStageRate {
             @Override
             public void onClick(View v) {
                 if (etFeedback.getText() != null && etFeedback.getText().length() > 0) {
-                    //// TODO: 2/8/16 : Write a callback with the text in it
-                    dialog.dismiss();
                     if (feedbackReceivedListener != null) {
                         feedbackReceivedListener.onFeedbackReceived(etFeedback.getText().toString());
                     }
-                } else {
-                    Toast.makeText(context, "Bro.. Write Something", Toast.LENGTH_LONG).show();
                 }
+                dialog.dismiss();
             }
         });
 
@@ -364,7 +358,6 @@ public class TwoStageRate {
                 onDialogDismissed();
             }
         });
-
 
         return dialog;
     }
@@ -424,18 +417,6 @@ public class TwoStageRate {
     public TwoStageRate setFeedbackReceivedListener(FeedbackReceivedListener feedbackReceivedListener) {
         this.feedbackReceivedListener = feedbackReceivedListener;
         return this;
-    }
-
-    public TwoStageRate setOnDialogDismissedListener(DialogDismissedListener dialogDismissedListener) {
-        this.dialogDismissedListener = dialogDismissedListener;
-        return this;
-    }
-
-    public void onDialogDismissed() {
-        if ((Utils.getBooleanSystemValue(SHARED_PREFERENCES_SHOULD_RESET_ON_DISMISS, mContext, true))) {
-            resetTwoStage();
-        }
-        //dialogDismissedListener.onDialogDismissed();
     }
 
     /*
@@ -526,5 +507,9 @@ public class TwoStageRate {
         return this;
     }
 
-
+    private void onDialogDismissed() {
+        if ((Utils.getBooleanSystemValue(SHARED_PREFERENCES_SHOULD_RESET_ON_DISMISS, mContext, true))) {
+            resetTwoStage();
+        }
+    }
 }

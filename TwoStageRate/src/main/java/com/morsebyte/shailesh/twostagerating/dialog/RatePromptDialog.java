@@ -1,16 +1,5 @@
 package com.morsebyte.shailesh.twostagerating.dialog;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.preference.TwoStatePreference;
-import android.view.Window;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.morsebyte.shailesh.twostagerating.AppRateDataModel;
-import com.morsebyte.shailesh.twostagerating.R;
-
 /**
  * Created by Shailesh on 2/8/16.
  */

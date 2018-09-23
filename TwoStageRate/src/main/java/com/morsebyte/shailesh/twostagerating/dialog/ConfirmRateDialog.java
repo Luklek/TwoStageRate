@@ -1,19 +1,5 @@
 package com.morsebyte.shailesh.twostagerating.dialog;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
-import android.view.View;
-import android.view.Window;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.morsebyte.shailesh.twostagerating.AppRateDataModel;
-import com.morsebyte.shailesh.twostagerating.IntentHelper;
-import com.morsebyte.shailesh.twostagerating.R;
-import com.morsebyte.shailesh.twostagerating.TwoStageRate;
-
 /**
  * Created by GuestHouser on 2/8/16.
  */
