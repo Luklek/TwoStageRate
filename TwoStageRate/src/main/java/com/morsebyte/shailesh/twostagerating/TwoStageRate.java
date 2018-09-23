@@ -54,6 +54,7 @@ public class TwoStageRate {
     private FeedbackReceivedListener feedbackReceivedListener;
     private DialogDismissedListener dialogDismissedListener;
     private FeedbackWithRatingReceivedListener feedbackWithRatingReceivedListener;
+    private ConfirmRateDialogListener confirmRateDialogListener;
 
     private TwoStageRate(Context context) {
         this.mContext = context;
@@ -77,6 +78,11 @@ public class TwoStageRate {
 
     public TwoStageRate setFeedbackWithRatingReceivedListener(FeedbackWithRatingReceivedListener feedbackWithRatingReceivedListener) {
         this.feedbackWithRatingReceivedListener = feedbackWithRatingReceivedListener;
+        return this;
+    }
+
+    public TwoStageRate setConfirmRateDialogListener(ConfirmRateDialogListener confirmRateDialogListener) {
+        this.confirmRateDialogListener = confirmRateDialogListener;
         return this;
     }
 
@@ -272,7 +278,10 @@ public class TwoStageRate {
         deny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ToDo : emit something here
+                if (confirmRateDialogListener != null) {
+                    confirmRateDialogListener.onConfirmationAccepted();
+                }
+
                 //Reseting twostage if declined and setting is done so
                 if ((Utils.getBooleanSystemValue(SHARED_PREFERENCES_SHOULD_RESET_ON_RATING_DECLINED, mContext, false))) {
                     resetTwoStage();
