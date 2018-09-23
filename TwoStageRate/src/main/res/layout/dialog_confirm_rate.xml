@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:paddingTop="12dp"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp">
 
     <TextView
         android:id="@+id/tvConfirmRateTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="0dp"
-        android:paddingTop="0dp"
         android:textColor="@color/dialog_title_text_color"
         android:textSize="@dimen/text_size_large" />
 
@@ -19,8 +19,6 @@
         android:id="@+id/tvConfirmRateText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
         android:textColor="@color/dialog_subtext_text_color"
         android:textSize="@dimen/text_size_medium" />
 
@@ -33,7 +31,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnConfirmSubmit"
+            android:id="@+id/btnConfirmDeny"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,12 +39,12 @@
             tools:text="deny" />
 
         <Button
-            android:id="@+id/btnConfirmDeny"
+            android:id="@+id/btnConfirmSubmit"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/rate_prompt_button_text_color"
-            tools:text="confirm" />
+            tools:text="submit" />
     </LinearLayout>
 
 </LinearLayout>
