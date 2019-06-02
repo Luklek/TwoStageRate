@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:paddingTop="12dp"
     android:paddingStart="12dp"
     android:paddingEnd="12dp">
@@ -29,10 +30,8 @@
         android:textStyle="bold"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:paddingStart="2dp"
-        android:paddingEnd="2dp"
         android:gravity="center"
-        tools:text="Title is very long so that will go to be w2sdfer sdfoiwrefoiherg eoirhjfweoijwoieurf woeijf"
+        tools:text="Title is very long"
         android:textColor="@color/dialog_title_text_color"/>
 
     <TextView
@@ -41,8 +40,6 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_medium"
         android:layout_marginBottom="2dp"
-        android:paddingStart="3dp"
-        android:paddingEnd="3dp"
         android:gravity="center"
         tools:text="Text description"
         android:textColor="@color/dialog_subtext_text_color"/>
