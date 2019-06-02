@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        TwoStageRate.with(MainActivity.this).showIfMeetsConditions();
     }
 
     @Override
@@ -34,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, EventActivity.class));
+                TwoStageRate twoStageRate = TwoStageRate.with(MainActivity.this);
+                twoStageRate.setRatePromptTitle("INITIAL_TITLE").
+                        setRatePromptLaterText("LATER_TEXT").setRatePromptDismissible(false);
+                twoStageRate.showRatePromptDialog();
             }
         });
     }
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private void initTwoStage() {
         TwoStageRate twoStageRate = TwoStageRate.with(this);
 
-        twoStageRate.setInstallDays(5).setEventsTimes(3).setLaunchTimes(5);
+        twoStageRate.setInstallDays(5);
 
         twoStageRate.resetOnDismiss(true).resetOnFeedBackDeclined(true).resetOnRatingDeclined(true);
 
