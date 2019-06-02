@@ -210,6 +210,8 @@ public class TwoStageRate {
         // set the custom dialog components - text, image and button
         TextView title = (TextView) dialog.findViewById(R.id.tvRatePromptTitle);
         title.setText(ratePromptDialog.getTitle());
+        TextView text = dialog.findViewById(R.id.tvRatePromptText);
+        text.setText(ratePromptDialog.getDescription());
         RatingBar rbRating = (RatingBar) dialog.findViewById(R.id.rbRatePromptBar);
         ImageView ivAppIcon = (ImageView) dialog.findViewById(R.id.ivAppIcon);
         Button later = dialog.findViewById(R.id.btnInitialLater);
@@ -388,6 +390,11 @@ public class TwoStageRate {
 
     public TwoStageRate setRatePromptTitle(String ratePromptTitle) {
         this.ratePromptDialog.ratePromptTitle = ratePromptTitle;
+        return this;
+    }
+
+    public TwoStageRate setRatePromptText(String ratePromptText) {
+        this.ratePromptDialog.ratePromptText = ratePromptText;
         return this;
     }
 
