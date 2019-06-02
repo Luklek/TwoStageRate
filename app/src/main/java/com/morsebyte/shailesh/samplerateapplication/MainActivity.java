@@ -34,8 +34,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 TwoStageRate twoStageRate = TwoStageRate.with(MainActivity.this);
-                twoStageRate.setRatePromptTitle("INITIAL_TITLE").
-                        setRatePromptLaterText("LATER_TEXT").setRatePromptDismissible(false);
+                twoStageRate.setRatePromptTitle("How would you rate our theme?").setRatePromptText("Tap the number of stars you would give us on a scale from 1 to 5.").
+                        setRatePromptLaterText("Maybe later").setRatePromptDismissible(false);
+                twoStageRate.setConfirmRateDialogTitle("Would you like to post your review on Google Play?").
+                        setConfirmRateDialogDescription("Thank you! A nice review will help and motivate us a lot.").
+                        setConfirmRateDialogPositiveText("Yes!").
+                        setConfirmRateDialogNegativeText("No Thanks").setRatePromptDismissible(false);
+                twoStageRate.setFeedbackDialogTitle("Feedback").
+                        setFeedbackDialogDescription("We are Really Sorry! Please tell us what problem you faced to help improve.").
+                        setFeedbackDialogPositiveText("Submit").
+                        setFeedbackDialogNegativeText("Cancel").setFeedbackDialogDismissible(false);
+
                 twoStageRate.showRatePromptDialog();
             }
         });
