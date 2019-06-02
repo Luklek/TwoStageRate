@@ -18,9 +18,6 @@ public class IntentHelper {
     public static Intent createIntentForGooglePlay(Context context) {
         String packageName = context.getPackageName();
         Intent intent = new Intent(Intent.ACTION_VIEW, UriHelper.getGooglePlay(packageName));
-        if (UriHelper.isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
-            intent.setPackage(GOOGLE_PLAY_PACKAGE_NAME);
-        }
         return intent;
     }
 

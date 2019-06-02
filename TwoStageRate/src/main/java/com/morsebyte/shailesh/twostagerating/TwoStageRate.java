@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.morsebyte.shailesh.twostagerating.dialog.ConfirmRateDialog;
 import com.morsebyte.shailesh.twostagerating.dialog.FeedbackDialog;
 import com.morsebyte.shailesh.twostagerating.dialog.RatePromptDialog;
+import com.morsebyte.shailesh.twostagerating.dialog.UriHelper;
 
 import java.util.Date;
 
@@ -210,6 +212,19 @@ public class TwoStageRate {
         title.setText(ratePromptDialog.getTitle());
         RatingBar rbRating = (RatingBar) dialog.findViewById(R.id.rbRatePromptBar);
         ImageView ivAppIcon = (ImageView) dialog.findViewById(R.id.ivAppIcon);
+        Button later = dialog.findViewById(R.id.btnInitialLater);
+        later.setText(ratePromptDialog.getLaterText());
+        later.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Reseting twostage if declined and setting is done so
+                if ((Utils.getBooleanSystemValue(SHARED_PREFERENCES_SHOULD_RESET_ON_RATING_DECLINED, mContext, false))) {
+                    resetTwoStage();
+                }
+                dialog.dismiss();
+
+            }
+        });
 
         if ((Utils.getBooleanSystemValue(SHARED_PREFERENCES_SHOW_ICON_KEY, context, true))) {
             ivAppIcon.setImageResource(Utils.twoStageGetAppIconResourceId(context));
@@ -290,11 +305,14 @@ public class TwoStageRate {
                 if (confirmRateDialogListener != null) {
                     confirmRateDialogListener.onConfirmationAccepted();
                 }
-
-                //// TODO: 2/8/16 : Write a callback
-                final Intent intentToAppstore = settings.getStoreType() == Settings.StoreType.GOOGLEPLAY ?
-                        IntentHelper.createIntentForGooglePlay(context) : IntentHelper.createIntentForAmazonAppstore(context);
-                context.startActivity(intentToAppstore);
+                try {
+                    final Intent intentToAppstore = IntentHelper.createIntentForGooglePlay(context);
+                    intentToAppstore.setPackage("com.android.vending");
+                    context.startActivity(intentToAppstore);
+                } catch (android.content.ActivityNotFoundException exception) {
+                    final Intent intentToAppstore = IntentHelper.createIntentForGooglePlay(context);
+                    context.startActivity(intentToAppstore);
+                }
                 dialog.dismiss();
 
             }
