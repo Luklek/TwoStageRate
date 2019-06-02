@@ -12,6 +12,8 @@
         android:id="@+id/tvConfirmRateTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        tools:text="Title"
         android:textColor="@color/dialog_title_text_color"
         android:textSize="@dimen/text_size_large" />
 
@@ -19,6 +21,8 @@
         android:id="@+id/tvConfirmRateText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        tools:text="Text description"
         android:textColor="@color/dialog_subtext_text_color"
         android:textSize="@dimen/text_size_medium" />
 

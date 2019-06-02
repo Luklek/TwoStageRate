@@ -31,8 +31,7 @@
         android:layout_marginTop="5dp"
         android:gravity="center"
         tools:text="Title"
-        android:textColor="@color/dialog_title_text_color"
-        />
+        android:textColor="@color/dialog_title_text_color"/>
 
     <RatingBar
         android:id="@+id/rbRatePromptBar"
