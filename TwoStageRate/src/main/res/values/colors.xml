@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="rate_prompt_button_text_color">#274f96</color>
-    <color name="dialog_title_text_color">#535559</color>
-    <color name="dialog_subtext_text_color">#959699</color>
+    <color name="dialog_title_text_color">#3E4042</color>
+    <color name="dialog_subtext_text_color">#6C6D6F</color>
+    <color name="rate_prompt_button_text_color">#5782CF</color>
+    <color name="rate_prompt_button_text_color_negative">#3E4042</color>
 </resources>
