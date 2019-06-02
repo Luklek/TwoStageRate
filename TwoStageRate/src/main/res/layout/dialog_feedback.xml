@@ -45,7 +45,7 @@
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/rate_prompt_button_text_color"
+            android:textColor="@color/rate_prompt_button_text_color_negative"
             tools:text="deny" />
 
         <Button

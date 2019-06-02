@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:paddingBottom="15dp"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:paddingTop="15dp">
+
     <ImageView
         android:id="@+id/ivAppIcon"
         android:layout_width="80dp"
@@ -33,46 +36,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        android:layout_gravity="center_horizontal"
-        />
+        android:layout_gravity="center_horizontal"/>
+
     <LinearLayout
         android:id="@+id/llButtonsLayout"
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-<TextView
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:text="Never"
-    android:textColor="@color/rate_prompt_button_text_color"
-    android:textSize="@dimen/text_size_medium"
-    android:layout_weight="1"
-    android:gravity="center_horizontal"
-    />
+        android:gravity="end"
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/btnInitialLater"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Later"
-            android:textColor="@color/rate_prompt_button_text_color"
-            android:textSize="@dimen/text_size_medium"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Rate"
-            android:textColor="@color/rate_prompt_button_text_color"
-            android:textSize="@dimen/text_size_medium"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            />
+            tools:text="Later"
+            android:textColor="@color/rate_prompt_button_text_color_negative"/>
 
     </LinearLayout>
 
