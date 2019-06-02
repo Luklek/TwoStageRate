@@ -227,7 +227,7 @@ public class TwoStageRate {
         });
 
         if ((Utils.getBooleanSystemValue(SHARED_PREFERENCES_SHOW_ICON_KEY, context, true))) {
-            ivAppIcon.setImageResource(Utils.twoStageGetAppIconResourceId(context));
+            ivAppIcon.setImageResource(R.mipmap.ic_logo_small);
             ivAppIcon.setVisibility(View.VISIBLE);
         } else {
             ivAppIcon.setVisibility(View.GONE);
