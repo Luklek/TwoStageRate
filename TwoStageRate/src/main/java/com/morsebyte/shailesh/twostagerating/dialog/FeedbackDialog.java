@@ -8,10 +8,10 @@ import com.morsebyte.shailesh.twostagerating.FeedbackReceivedListener;
 public class FeedbackDialog {
 
 
-    public String feedbackPromptTitle = "We're Really Sorry";
-    public String feedbackPromptText = "Could you tell us what problem you faced. This will help us improve.";
+    public String feedbackPromptTitle = "Feedback";
+    public String feedbackPromptText = "We are Really Sorry! Please tell us what problem you faced to help us improve.";
     public String feedbackPromptPositiveText = "Submit";
-    public String feedbackPromptNegativeText = "No Thanks!";
+    public String feedbackPromptNegativeText = "Cancel";
     public boolean dismissible = true;
     public void setDismissible(boolean dismissible)
     {

@@ -5,10 +5,10 @@ package com.morsebyte.shailesh.twostagerating.dialog;
  */
 public class ConfirmRateDialog {
 
-    public String confirmRateTitle = "Thank you!";
-    public String confirmRateText = "Would you like to post your review on app store. This will help and motivate us a lot.";
-    public String confirmRateNegativeText = "No Thanks!";
-    public String confirmRatePositiveText = "Sure";
+    public String confirmRateTitle = "Would you like to post your review on Google Play?";
+    public String confirmRateText = "Thank you! We are very happy to hear that you love this theme. A nice review will help and motivate us a lot.";
+    public String confirmRateNegativeText = "No Thanks";
+    public String confirmRatePositiveText = "Yes!";
     public boolean dismissible = true;
     public void setDismissible(boolean dismissible)
     {

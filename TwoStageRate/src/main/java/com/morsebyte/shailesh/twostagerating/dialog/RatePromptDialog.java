@@ -5,9 +5,9 @@ package com.morsebyte.shailesh.twostagerating.dialog;
  */
 public class RatePromptDialog {
 
-    public String ratePromptTitle = "How would you rate our app?";
-    public String ratePromptText = "Tap on the stars to rate us on a scale 1 to 5 adn tap again and again and agoin";
-    public String ratePromptLaterText= "Remind me later";
+    public String ratePromptTitle = "How would you rate our theme?";
+    public String ratePromptText = "Tap the number of stars you would give us on a scale from 1 to 5.";
+    public String ratePromptLaterText= "Maybe later";
     public String ratePromptNeverText = "Never show again";
     public boolean dismissible = true;
     public void setDismissible(boolean dismissible)
