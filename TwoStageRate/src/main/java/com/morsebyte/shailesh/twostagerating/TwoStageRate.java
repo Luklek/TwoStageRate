@@ -109,7 +109,7 @@ public class TwoStageRate {
 
     }
 
-    private boolean checkIfMeetsCondition() {
+    public boolean checkIfMeetsCondition() {
         return isOverLaunchTimes() ||
                 isOverInstallDays() || isOverEventCounts();
 
